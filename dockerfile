@@ -5,7 +5,6 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf /usr/share/nginx/html/*
 
-
 # Copy your HTML and CSS files to the working directory
 COPY finally.html .
 COPY style.css .
@@ -14,6 +13,9 @@ COPY nextpage.html .
 
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
+
+#copy the custom conf file from current directory and move to default configuration directory 
+COPY ./my_nginx.conf /etc/nginx/conf.d/default.conf 
 
 # Expose the default Nginx port
 EXPOSE 80
